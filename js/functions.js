@@ -11,3 +11,18 @@ const checkPalindrome = (string) => {
   }
   return (string.toLowerCase() === reverseString.toLowerCase());
 };
+
+const getNumber = (string) => {
+  if (typeof string === 'number'){
+    string = String(string);
+  }
+  string = string.replaceAll(' ', '');
+  let numberString = '';
+  for (let i = 0; i < string.length; i++) {
+    const number = parseInt(string[i], 10);
+    if (!Number.isNaN(number)) {
+      numberString += number;
+    }
+  }
+  return parseInt(numberString, 10);
+};
