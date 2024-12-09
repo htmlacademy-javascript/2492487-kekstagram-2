@@ -1,3 +1,3 @@
 import {photosStock} from './data.js';
 
-console.log (photosStock());
+console.log (photosStock);
