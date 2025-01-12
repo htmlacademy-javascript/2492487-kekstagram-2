@@ -41,6 +41,4 @@ const NAMES = [
   'Иван Дурак',
 ];
 
-const PHOTO_NUMBERS = 25;
-
-export {DESCRIPTIONS, MESSAGES, NAMES, PHOTO_NUMBERS};
+export {DESCRIPTIONS, MESSAGES, NAMES};
