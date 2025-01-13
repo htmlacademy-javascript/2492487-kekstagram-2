@@ -41,6 +41,20 @@ const renderComments = (photo) => {
   });
   commentsList.appendChild(commentsListFragment);
 
+  if (commentsList.children.length > 5) {
+    for (let i = 5; i < commentsList.children.length; i++) {
+      commentsList.children[i].classList.add('hidden');
+    }
+    commentsShownElement.textContent = '5';
+  }
+
+  commentsLoader.addEventListener('click', () => {
+    for (let i = Number(commentsShownElement.textContent); i < Number(commentsShownElement.textContent) + 5; i++) {
+      commentsList.children[i].classList.remove('hidden');
+    }
+    commentsShownElement.textContent = String(Number(commentsShownElement.textContent) + 5);
+  });
+
   // photoModalElement.querySelector('.social__comment-shown-count').textContent = pictureCommentsShown;
 
   //   const commentsList = photoModalElement.querySelector('.social__comments');
