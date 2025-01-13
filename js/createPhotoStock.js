@@ -1,5 +1,5 @@
 import {getRandomInteger, createRandomId, getRandomArrayElement} from './utils.js';
-import {DESCRIPTIONS, MESSAGES, NAMES, PHOTO_NUMBERS} from './data.js';
+import {DESCRIPTIONS, MESSAGES, NAMES} from './data.js';
 
 const generatePhotoId = createRandomId(1, 25);
 
@@ -34,6 +34,6 @@ const createPhoto = () => ({
   comments: Array.from({length:getRandomInteger(0, 30)}, createComment),
 });
 
-const photosStock = (count) => Array.from({length: count}, createPhoto);
+const createPhotosStock = (count) => Array.from({length: count}, createPhoto);
 
-export {photosStock};
+export {createPhotosStock};
