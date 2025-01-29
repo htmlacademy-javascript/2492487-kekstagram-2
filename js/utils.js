@@ -1,3 +1,5 @@
+import { ALERT_SHOW_TIME } from "./constants";
+
 // функция получения рандомного числа из заданного диапазона
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -28,5 +30,13 @@ const getRandomArrayElement = (elements) => elements[getRandomInteger(0, element
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 const isEnterKey = (evt) => evt.key === 'Enter';
+
+export const showAlert = (errorTemplate) => {
+  const dataErrorAlert = errorTemplate.cloneNode(true);
+  document.body.append(dataErrorAlert);
+  setTimeout(() => {
+    dataErrorAlert.remove();
+  }, ALERT_SHOW_TIME);
+};
 
 export {getRandomInteger, createRandomId, getRandomArrayElement, isEscapeKey, isEnterKey};

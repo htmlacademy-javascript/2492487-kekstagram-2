@@ -1,8 +1,9 @@
-import { isEscapeKey} from './utils.js';
+import { isEscapeKey, showAlert } from './utils.js';
 import { isValid } from './validation.js';
 import { reset as resetValidation } from './validation.js';
-import {reset as resetScale} from './scale.js';
-import {reset as resetEffects} from'./effects.js';
+import { reset as resetScale } from './scale.js';
+import { reset as resetEffects } from './effects.js';
+import { sendData } from './serverData.js';
 
 const body = document.querySelector('body');
 const photoUploaderForm = body.querySelector('.img-upload__form');
@@ -36,20 +37,27 @@ const closeUploader = () => {
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
-photoUploaderInput.addEventListener('change', ()=>{
+photoUploaderInput.addEventListener('change', () => {
   openUploader();
 });
 
-cancelUploaderButton.addEventListener('click', (evt)=>{
+cancelUploaderButton.addEventListener('click', (evt) => {
   evt.preventDefault();
   closeUploader();
 });
 
-photoUploaderForm.addEventListener('submit', (evt)=>{
-  if (!isValid) {
+export const submitUploaderForm = (onSuccess) => {
+  photoUploaderForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-  }
-});
+    if (!isValid) {
+      sendData(new FormData(evt.target))
+        .then(onSuccess)
+        .catch(() => {
+          showAlert();
+        });
+    }
+  });
+};
 
 hashtagsInput.addEventListener('keydown', (evt) => {
   if (isEscapeKey(evt)) {

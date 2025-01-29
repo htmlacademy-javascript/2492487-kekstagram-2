@@ -7,6 +7,8 @@ export const SCALE_STEP = 25;
 export const MAX_SCALE = 100;
 export const MIN_SCALE = 25;
 
+export const ALERT_SHOW_TIME = 5000;
+
 export const SCALE_FACTOR = 0.01;
 
 export const EFFECTS = {
