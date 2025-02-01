@@ -31,8 +31,10 @@ const getRandomArrayElement = (elements) => elements[getRandomInteger(0, element
 const isEscapeKey = (evt) => evt.key === 'Escape';
 const isEnterKey = (evt) => evt.key === 'Enter';
 
-export const showAlert = (errorTemplate) => {
-  const dataErrorAlert = errorTemplate.cloneNode(true);
+
+export const showAlert = () => {
+  const dataErrorTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
+  const dataErrorAlert = dataErrorTemplate.cloneNode(true);
   document.body.append(dataErrorAlert);
   setTimeout(() => {
     dataErrorAlert.remove();

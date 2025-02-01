@@ -1,5 +1,5 @@
 
-export const getData = () => fetch('https://31.javascript.htmlacadem.pro/kekstagram/data')
+export const getData = () => fetch('https://31.javascript.htmlacademy.pro/kekstagram/data')
   .then((response) => {
     if (!response.ok) {
       throw new Error();
@@ -17,7 +17,4 @@ export const sendData = (body) => fetch(
     if (!response.ok) {
       throw new Error();
     }
-  })
-  .catch(() => {
-    throw new Error('Не удалось отправить форму. Попробуйте ещё раз');
   });
