@@ -1,4 +1,4 @@
-import { isEscapeKey} from './utils';
+import { removeEscapeControl, setEscapeControl } from './escapeControl';
 
 const body = document.querySelector('body');
 const photos = document.querySelector('.pictures');
@@ -17,18 +17,15 @@ const commentTemplate = commentsList.querySelector('.social__comment');
 let localComments;
 let renderedCommets = 0;
 
-const onDocumentKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closePhotoModal();
-  }
+const closePhotoModal = () => {
+  photoModalElement.classList.add('hidden');
+  body.classList.remove('modal-open');
 };
 
 const showModal = () => {
   photoModalElement.classList.remove('hidden');
   body.classList.add('modal-open');
-
-  document.addEventListener('keydown', onDocumentKeydown);
+  setEscapeControl(closePhotoModal);
 };
 
 const renderStatistic = () => {
@@ -52,7 +49,6 @@ const renderComments = () => {
     commentImgElement.alt = comment.name;
     commentElement.querySelector('.social__text').textContent = comment.message;
     commentsListFragment.appendChild(commentElement);
-
     renderedCommets++;
   });
   commentsList.appendChild(commentsListFragment);
@@ -72,26 +68,16 @@ const renderModal = (photo) => {
   imageElement.alt = photo.description;
   descriptionElement.textContent = photo.description;
   likesElement.textContent = photo.likes;
-
   commentsTotalElement.textContent = photo.comments.length;
-
   renderComments();
 };
-
 
 export const openPhotoModal = (data) => {
   showModal();
   renderModal(data);
 };
 
-const closePhotoModal = () => {
-  photoModalElement.classList.add('hidden');
-
-  body.classList.remove('modal-open');
-
-  document.removeEventListener('keydown', onDocumentKeydown);
-};
-
 photoModalCloseElement.addEventListener('click', () => {
   closePhotoModal();
+  removeEscapeControl();
 });
