@@ -63,4 +63,6 @@ export const EFFECTS_SETTINGS = {
     style: 'brightness',
     units: ''
   }
-}
+};
+
+export const DEFAULT_TIMEOUT_DELAY = 500;
