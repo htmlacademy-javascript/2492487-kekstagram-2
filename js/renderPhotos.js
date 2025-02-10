@@ -1,10 +1,13 @@
-import { localData } from './main.js';
 import { openPhotoModal } from './renderModalPhoto.js';
 
 const pictureContainer = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
+let localData;
+
 export const renderCards = (photos) => {
+  localData = [...photos];
+
   const pictureListFragment = document.createDocumentFragment();
 
   photos.forEach((photo) => {
