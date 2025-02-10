@@ -1,12 +1,10 @@
+import { localData } from './main.js';
 import { openPhotoModal } from './renderModalPhoto.js';
 
 const pictureContainer = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-let localData;
-
 export const renderCards = (photos) => {
-  localData = [...photos];
   const pictureListFragment = document.createDocumentFragment();
 
   photos.forEach((photo) => {
@@ -19,7 +17,10 @@ export const renderCards = (photos) => {
     pictureElement.querySelector('.picture__likes').textContent = photo.likes;
     pictureListFragment.appendChild(pictureElement);
   });
-
+  const currentPhotos = document.querySelectorAll('.picture');
+  if(currentPhotos){
+    currentPhotos.forEach((element) => element.remove());
+  }
   pictureContainer.appendChild(pictureListFragment);
 };
 

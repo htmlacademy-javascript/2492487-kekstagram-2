@@ -4,6 +4,8 @@ import { reset as resetValidation } from './validation.js';
 import { reset as resetScale } from './scale.js';
 import { reset as resetEffects } from './effects.js';
 import { sendData } from './serverData.js';
+import { showPopup } from './popup.js';
+import { removeEscapeControl, setEscapeControl } from './escapeControl.js';
 
 const body = document.querySelector('body');
 const photoUploaderForm = body.querySelector('.img-upload__form');
@@ -14,19 +16,6 @@ const formFields = photoUploaderForm.querySelector('.img-upload__text');
 const hashtagsInput = formFields.querySelector('.text__hashtags');
 const commentInput = formFields.querySelector('.text__description');
 
-const onDocumentKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closeUploader();
-  }
-};
-
-export const openUploader = () => {
-  photoEditForm.classList.remove('hidden');
-  body.classList.add('modal-open');
-  document.addEventListener('keydown', onDocumentKeydown);
-};
-
 const closeUploader = () => {
   photoEditForm.classList.add('hidden');
   body.classList.remove('modal-open');
@@ -34,7 +23,14 @@ const closeUploader = () => {
   resetValidation();
   resetScale();
   resetEffects();
-  document.removeEventListener('keydown', onDocumentKeydown);
+};
+
+const closeFormFlag = () => !(document.activeElement === hashtagsInput || document.activeElement === commentInput);
+
+export const openUploader = () => {
+  photoEditForm.classList.remove('hidden');
+  body.classList.add('modal-open');
+  setEscapeControl(closeUploader, closeFormFlag);
 };
 
 photoUploaderInput.addEventListener('change', () => {
@@ -44,31 +40,8 @@ photoUploaderInput.addEventListener('change', () => {
 cancelUploaderButton.addEventListener('click', (evt) => {
   evt.preventDefault();
   closeUploader();
+  removeEscapeControl();
 });
-
-const closeFormMessage = (message) => {
-  message.remove();
-};
-
-const showFormMessage = (type) => {
-  const formMessageTemplate = document.querySelector(`#${type}`).content.querySelector(`.${type}`);
-  const formMessage = formMessageTemplate.cloneNode(true);
-  document.body.append(formMessage);
-  const formMessageButton = formMessage.querySelector(`.${type}__button`);
-  formMessageButton.focus();
-
-  formMessage.addEventListener('click', () => {
-    closeFormMessage(formMessage);
-  });
-
-  formMessageButton.addEventListener('keydown', (evt) => {
-    if (isEscapeKey(evt)) {
-      evt.stopPropagation();
-      closeFormMessage(formMessage);
-    }
-  });
-
-};
 
 photoUploaderForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
@@ -76,22 +49,11 @@ photoUploaderForm.addEventListener('submit', (evt) => {
     sendData(new FormData(evt.target))
       .then(()=>{
         closeUploader();
-        showFormMessage('success');
+        removeEscapeControl();
+        showPopup('success');
       })
       .catch(() => {
-        showFormMessage('error');
+        showPopup('error');
       });
-  }
-});
-
-hashtagsInput.addEventListener('keydown', (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.stopPropagation();
-  }
-});
-
-commentInput.addEventListener('keydown', (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.stopPropagation();
   }
 });
