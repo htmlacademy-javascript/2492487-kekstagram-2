@@ -1,5 +1,7 @@
+export const PHOTO_TYPES = ['jpg', 'jpeg', 'png', 'webp'];
 export const PHOTOS_COUNT = 25;
 export const RANDOM_PHOTOS_COUNT = 10;
+export const DEFAULT_TIMEOUT_DELAY = 500;
 export const MAX_COMMENT_LENGTH = 140;
 export const MAX_HASHTAGS = 5;
 export const VALIDHASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -65,5 +67,3 @@ export const EFFECTS_SETTINGS = {
     units: ''
   }
 };
-
-export const DEFAULT_TIMEOUT_DELAY = 5000;

@@ -7,6 +7,7 @@ const effectContainer = photoUploaderForm.querySelector('.effects');
 const effectLevelValue = photoUploaderForm.querySelector('.effect-level__value');
 const photoPreview = photoUploaderForm.querySelector('.img-upload__preview img');
 
+
 let currentEffect = EFFECTS.NONE;
 
 noUiSlider.create(effectSlider, {
@@ -22,12 +23,12 @@ noUiSlider.create(effectSlider, {
 const render = () => {
   const { style, units } = EFFECTS_SETTINGS[currentEffect];
   photoPreview.style.filter = `${style}(${effectLevelValue.value}${units})`;
-}
+};
 
 effectSlider.noUiSlider.on('update', () => {
   effectLevelValue.value = effectSlider.noUiSlider.get();
   render();
-})
+});
 
 const updateSlider = () => {
   const { min, max, step } = EFFECTS_SETTINGS[currentEffect];
@@ -39,7 +40,7 @@ const updateSlider = () => {
     start: max,
     step,
   });
-}
+};
 
 effectContainer.addEventListener('change', ({ target }) => {
   currentEffect = target.value;
