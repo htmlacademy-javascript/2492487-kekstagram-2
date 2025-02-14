@@ -6,6 +6,7 @@ import { sendData } from './serverData.js';
 import { showPopup } from './popup.js';
 import { removeEscapeControl, setEscapeControl } from './escapeControl.js';
 import { getFile } from './getFile.js';
+import { Popups, SubmitButtonText } from './constants.js';
 
 const body = document.querySelector('body');
 const photoUploaderForm = body.querySelector('.img-upload__form');
@@ -45,14 +46,9 @@ cancelUploaderButton.addEventListener('click', (evt) => {
   removeEscapeControl();
 });
 
-const blockSubmitButton = () => {
-  submitButton.disabled = true;
-  submitButton.textContent = 'Публикую';
-};
-
-const unblockSubmitButton = () => {
-  submitButton.disabled = false;
-  submitButton.textContent = 'Опубликовать';
+const blockSubmitButton = (isBlocked = true) => {
+  submitButton.disabled = isBlocked;
+  submitButton.textContent = isBlocked ? SubmitButtonText.SENDING : SubmitButtonText.IDLE;
 };
 
 photoUploaderForm.addEventListener('submit', (evt) => {
@@ -60,14 +56,16 @@ photoUploaderForm.addEventListener('submit', (evt) => {
   if (isValid()) {
     blockSubmitButton();
     sendData(new FormData(evt.target))
-      .then(()=>{
+      .then(() => {
         closeUploader();
         removeEscapeControl();
-        showPopup('success');
+        showPopup(Popups.SUCCESS);
       })
       .catch(() => {
-        showPopup('error');
+        showPopup(Popups.ERROR);
       })
-      .finally(unblockSubmitButton);
+      .finally(() => {
+        blockSubmitButton(false);
+      });
   }
 });

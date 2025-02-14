@@ -1,7 +1,8 @@
 export const PHOTO_TYPES = ['jpg', 'jpeg', 'png', 'webp'];
-export const PHOTOS_COUNT = 25;
 export const RANDOM_PHOTOS_COUNT = 10;
+export const ALERT_SHOW_TIME = 5000;
 export const DEFAULT_TIMEOUT_DELAY = 500;
+export const COMMENTS_STEP = 5;
 export const MAX_COMMENT_LENGTH = 140;
 export const MAX_HASHTAGS = 5;
 export const VALIDHASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -9,8 +10,6 @@ export const SPACE = /\s+/g;
 export const SCALE_STEP = 25;
 export const MAX_SCALE = 100;
 export const MIN_SCALE = 25;
-
-export const ALERT_SHOW_TIME = 5000;
 
 export const SCALE_FACTOR = 0.01;
 
@@ -66,4 +65,20 @@ export const EFFECTS_SETTINGS = {
     style: 'brightness',
     units: ''
   }
+};
+
+export const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Публикую'
+};
+
+export const Popups = {
+  SUCCESS: 'success',
+  ERROR: 'error'
+};
+
+export const Filters = {
+  DEFAULT: 'filter-default',
+  DISCUSSED: 'filter-discussed',
+  RANDOM: 'filter-random'
 };
