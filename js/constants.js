@@ -1,4 +1,4 @@
-export const PHOTO_TYPES = ['jpg', 'jpeg', 'png', 'webp'];
+export const PHOTO_TYPES = ['.jpg', '.jpeg', '.png', '.webp'];
 export const RANDOM_PHOTOS_COUNT = 10;
 export const ALERT_SHOW_TIME = 5000;
 export const DEFAULT_TIMEOUT_DELAY = 500;
