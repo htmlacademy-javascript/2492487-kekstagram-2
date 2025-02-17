@@ -1,7 +1,7 @@
+import { COMMENTS_STEP } from './constants';
 import { removeEscapeControl, setEscapeControl } from './escapeControl';
 
 const body = document.querySelector('body');
-const photos = document.querySelector('.pictures');
 const photoModalElement = document.querySelector('.big-picture');
 const photoModalCloseElement = photoModalElement.querySelector('.big-picture__cancel');
 const imageElement = photoModalElement.querySelector('.big-picture__img img');
@@ -42,7 +42,7 @@ const renderLoader = () => {
 
 const renderComments = () => {
   const commentsListFragment = document.createDocumentFragment();
-  localComments.splice(0, 5).forEach((comment) => {
+  localComments.splice(0, COMMENTS_STEP).forEach((comment) => {
     const commentElement = commentTemplate.cloneNode(true);
     const commentImgElement = commentElement.querySelector('.social__picture');
     commentImgElement.src = comment.avatar;

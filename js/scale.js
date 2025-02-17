@@ -14,13 +14,13 @@ const render = () => {
 
 const onBiggerClick = () => {
   currentScale = Math.min(currentScale + SCALE_STEP, MAX_SCALE);
-  render()
+  render();
 };
 
 const onSmallerClick = () => {
   currentScale = Math.max(currentScale - SCALE_STEP, MIN_SCALE);
   render();
-}
+};
 
 scaleControlBigger.addEventListener('click', onBiggerClick);
 

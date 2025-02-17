@@ -13,7 +13,7 @@ const pristine = new Pristine(photoUploaderForm, {
 const getHashTags = (value) => value.toLowerCase().replaceAll(SPACE, ' ').trim().split(' ');
 
 const validateHashtags = (value) => {
-  if(value === '') {
+  if (value === '') {
     return true;
   }
   const hashtags = getHashTags(value);

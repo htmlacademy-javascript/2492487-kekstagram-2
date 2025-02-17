@@ -5,9 +5,16 @@ const pictureTemplate = document.querySelector('#picture').content.querySelector
 
 let localData;
 
+const clearPhotos = () => {
+  const currentPhotos = document.querySelectorAll('.picture');
+  if (currentPhotos) {
+    currentPhotos.forEach((element) => element.remove());
+  }
+};
+
 export const renderCards = (photos) => {
   localData = [...photos];
-
+  clearPhotos();
   const pictureListFragment = document.createDocumentFragment();
 
   photos.forEach((photo) => {
@@ -20,16 +27,12 @@ export const renderCards = (photos) => {
     pictureElement.querySelector('.picture__likes').textContent = photo.likes;
     pictureListFragment.appendChild(pictureElement);
   });
-  const currentPhotos = document.querySelectorAll('.picture');
-  if(currentPhotos){
-    currentPhotos.forEach((element) => element.remove());
-  }
   pictureContainer.appendChild(pictureListFragment);
 };
 
 pictureContainer.addEventListener('click', (evt) => {
   const photoElement = evt.target.closest('.picture');
-  if(photoElement) {
+  if (photoElement) {
     const id = Number(photoElement.dataset.photoId);
     const photoData = localData.find((item) => item.id === id);
     openPhotoModal(photoData);
