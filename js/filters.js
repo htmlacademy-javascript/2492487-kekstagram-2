@@ -1,6 +1,6 @@
-import { Filters } from './constants.js';
+import { Filters, RANDOM_PHOTOS_COUNT } from './constants.js';
 import { renderCards } from './renderPhotos.js';
-import { debounce} from './utils.js';
+import { debounce } from './utils.js';
 
 const form = document.querySelector('.img-filters__form');
 const filtersList = document.querySelector('.img-filters');
@@ -13,7 +13,7 @@ const debouncedRender = debounce(renderCards);
 const getFilteredData = {
   [Filters.DEFAULT]: () => localPhotos,
   [Filters.DISCUSSED]: () => [...localPhotos].sort((b, a) => a.comments.length - b.comments.length),
-  [Filters.RANDOM]: () => [...localPhotos].sort(() => Math.random() - 0.5).slice(0, 10)
+  [Filters.RANDOM]: () => [...localPhotos].sort(() => Math.random() - 0.5).slice(0, RANDOM_PHOTOS_COUNT)
 };
 
 const setActiveButton = (button) => {
